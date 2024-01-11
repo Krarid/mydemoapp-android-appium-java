@@ -13,11 +13,13 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
+import pageObjects.ProductsPage;
 
 public class BaseTest extends AppiumUtils {
 	
 	public AndroidDriver driver;
 	public AppiumDriverLocalService service;
+	public ProductsPage products;
 	
 	@SuppressWarnings("deprecation")
 	@BeforeClass(alwaysRun=true)
@@ -45,6 +47,8 @@ public class BaseTest extends AppiumUtils {
 		
 		driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
+		products = new ProductsPage(driver);
 	}
 	
 	@AfterClass(alwaysRun=true)
