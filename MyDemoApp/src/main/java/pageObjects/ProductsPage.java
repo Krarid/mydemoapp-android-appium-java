@@ -3,8 +3,10 @@ package pageObjects;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.NotFoundException;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -32,14 +34,29 @@ public class ProductsPage extends AndroidActions {
 	}
 	
 	public ProductPage chooseProduct(String product)
-	{
-		scrollToElement("© 2024 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy.");
+	{		
+		boolean productFound = false, scrolled = false;
 		
-		for( WebElement p : products ) {
-			if( p.findElement(By.xpath("//*[@content-desc='store item text']")).getText().contains(product) ) {
-				p.click();
-				break;
+		while(!productFound) {
+			for( WebElement p : products ) {
+				try {
+					if( p.findElement(By.xpath("//*[@content-desc='store item text']")).getText().contains(product) ) {
+						p.click();
+						productFound = true;
+						break;
+					}
+				} catch(NoSuchElementException e) {
+					break;
+				}
 			}
+			
+			if(productFound)
+				break;
+			else if(!scrolled) {
+				scrollToElement("© 2024 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy.");
+				scrolled = true;
+			} else
+				throw new NotFoundException();
 		}
 		
 		return new ProductPage(driver);
