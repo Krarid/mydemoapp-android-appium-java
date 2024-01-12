@@ -1,0 +1,38 @@
+[
+	{
+		"productName": "Onesie",
+		"color": "black",
+		"quantity": 3,
+		
+		"username": "bob@example.com",
+		"password": "10203040",
+		"fullName": "Rebecca Winter",
+		"address": "Mandorley 112",
+		"city": "Truro",
+		"state": "Cornwall",
+		"zipCode": "89750",
+		
+		"country": "United Kingdom",
+		"cardNumber": "325812657568789",
+		"expiration": "0325",
+		"securityCode": "123"
+	},
+	{
+		"productName": "Backpack",
+		"color": "blue",
+		"quantity": 5,
+		
+		"username": "bob@example.com",
+		"password": "10203040",
+		"fullName": "Rebecca Winter",
+		"address": "Mandorley 112",
+		"city": "Truro",
+		"state": "Cornwall",
+		"zipCode": "89750",
+		
+		"country": "United Kingdom",
+		"cardNumber": "325812657568789",
+		"expiration": "0325",
+		"securityCode": "123"
+	}
+]
