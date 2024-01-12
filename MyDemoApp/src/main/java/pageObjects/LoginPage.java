@@ -42,4 +42,11 @@ public class LoginPage extends AndroidActions {
 		loginButton.click();
 		return new ShipmentPage(driver);
 	}
+	
+	public void login(String username, String password)
+	{
+		enterUsername(username);
+		enterPassword(password);
+		loginButton.click();
+	}
 }
