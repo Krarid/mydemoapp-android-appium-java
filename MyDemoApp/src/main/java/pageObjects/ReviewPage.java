@@ -47,6 +47,7 @@ public class ReviewPage extends AndroidActions {
 	
 	public CompletePage placeOrder()
 	{
+		placeOrderButton.click();
 		return new CompletePage(driver);
 	}
 }
