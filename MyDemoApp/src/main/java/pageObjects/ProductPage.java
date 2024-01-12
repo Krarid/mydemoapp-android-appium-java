@@ -52,7 +52,6 @@ public class ProductPage extends AndroidActions {
 	
 	public void chooseQuantity(int quantity)
 	{
-		System.out.println(counter.getText());
 		while( Integer.parseInt(counter.getText()) < quantity ) {
 			plusButton.click();
 		}
