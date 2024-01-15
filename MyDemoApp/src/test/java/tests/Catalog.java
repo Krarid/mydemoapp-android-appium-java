@@ -35,19 +35,11 @@ public class Catalog extends BaseTest {
 		MyCartPage cart = product.goToCart();
 		
 		ShipmentPage shipment = cart.proceedToCheckout();
-		shipment.enterFullName(input.get("fullName"));
-		shipment.enterAddress(input.get("address"));
-		shipment.enterCity(input.get("city"));
-		shipment.enterState(input.get("state"));
-		shipment.enterZipCode(input.get("zipCode"));
-		shipment.enterCountry(input.get("country"));
+		shipment.enterShipmentDetails();
 		
 		PaymentPage payment = shipment.toPayment();
 		Thread.sleep(500);
-		payment.enterFullName(input.get("fullName"));
-		payment.enterCardNumber(input.get("cardNumber"));
-		payment.enterExpiration(input.get("expiration"));
-		payment.enterSecurityCode(input.get("securityCode"));
+		payment.enterPaymentDetails();
 		
 		ReviewPage review = payment.reviewOrder();
 		Assert.assertTrue( review.getProduct().contains(input.get("productName")) );
