@@ -1,5 +1,9 @@
 package pageObjects;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -51,6 +55,19 @@ public class PaymentPage extends AndroidActions {
 	public void enterSecurityCode(String securityCode)
 	{
 		this.securityCode.sendKeys(securityCode);
+	}
+	
+	public void enterPaymentDetails() throws IOException
+	{
+		Properties property = new Properties();
+		FileInputStream propertyFile = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\data.properties");
+		
+		property.load(propertyFile);
+		
+		enterFullName(property.getProperty("fullName"));
+		enterCardNumber(property.getProperty("cardNumber"));
+		enterExpiration(property.getProperty("expiration"));
+		enterSecurityCode(property.getProperty("securityCode"));
 	}
 	
 	public ReviewPage reviewOrder()
