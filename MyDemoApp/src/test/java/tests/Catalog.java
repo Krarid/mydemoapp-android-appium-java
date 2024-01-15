@@ -100,6 +100,40 @@ public class Catalog extends BaseTest {
 		complete.continueShopping();
 	}
 	
+	@Test(dataProvider="getData")
+	public void DecreaseTheCart(HashMap<String, String> input) throws InterruptedException, IOException
+	{
+		int items = Integer.parseInt( input.get("quantity") );
+		float price, delivery = 5.99f;
+		
+		final DecimalFormat df = new DecimalFormat("0.00");
+		
+		ProductPage product = products.chooseProduct(input.get("productName"));
+		product.chooseQuantity(5);
+		product.addToCart();
+		price = product.getPrice();
+		
+		MyCartPage cart = product.goToCart();
+		cart.decrement(items);
+		
+		Thread.sleep(500);
+		
+		Assert.assertEquals(cart.getTotalPrice(), "$" + df.format(price * items) );
+		
+		ShipmentPage shipment = cart.proceedToCheckout();
+		shipment.enterShipmentDetails();
+		
+		PaymentPage payment = shipment.toPayment();
+		Thread.sleep(500);
+		payment.enterPaymentDetails();
+		
+		ReviewPage review = payment.reviewOrder();
+		Assert.assertEquals(review.getTotalPrice(), "$" + df.format(price * items + delivery) );
+		
+		CompletePage complete = review.placeOrder();
+		complete.continueShopping();
+	}
+	
 	@DataProvider
 	public Object[][] getData(Method m) throws IOException
 	{
@@ -117,6 +151,10 @@ public class Catalog extends BaseTest {
 			
 			case "IncreaseTheCart":
 				dataFile = "3";
+			break;
+			
+			case "DecreaseTheCart":
+				dataFile = "4";
 			break;
 		}
 		

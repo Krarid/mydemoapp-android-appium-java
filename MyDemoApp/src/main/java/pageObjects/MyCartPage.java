@@ -35,6 +35,12 @@ public class MyCartPage extends AndroidActions {
 	@AndroidFindBy(xpath = "//*[@content-desc='counter plus button']")
 	private WebElement counterPlusButton;
 	
+	@AndroidFindBy(xpath = "//*[@content-desc='counter minus button']")
+	private WebElement counterMinusButton;
+	
+	@AndroidFindBy(xpath = "//*[@content-desc='counter amount']/android.widget.TextView")
+	private WebElement counterAmount;
+	
 	@AndroidFindBy(accessibility = "total price")
 	private WebElement totalPrice;
 	
@@ -93,6 +99,19 @@ public class MyCartPage extends AndroidActions {
 		for(int i = 1; i < items; i++) {
 			counterPlusButton.click();
 		}
+	}
+	
+	public void decrement(int items)
+	{
+		 while(getCounterAmount() > 0 && getCounterAmount() != items) {
+			 counterMinusButton.click();
+		 }
+	}
+	
+	public int getCounterAmount()
+	{
+		System.out.println(counterAmount.getText());
+		return Integer.parseInt(counterAmount.getText());
 	}
 	
 	public String getTotalPrice()
