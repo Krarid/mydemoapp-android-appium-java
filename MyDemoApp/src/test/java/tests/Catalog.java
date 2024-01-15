@@ -1,14 +1,18 @@
 package tests;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import io.appium.java_client.AppiumBy;
 import pageObjects.CompletePage;
 import pageObjects.MyCartPage;
 import pageObjects.PaymentPage;
@@ -49,6 +53,22 @@ public class Catalog extends BaseTest {
 		
 		CompletePage complete = review.placeOrder();
 		complete.continueShopping();
+	}
+	
+	@Test(dataProvider="getData")
+	public void RemoveProduct(HashMap<String, String> input)
+	{
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+		
+		ProductPage product = products.chooseProduct(input.get("productName"));
+		product.chooseColor(input.get("color"));
+		product.chooseQuantity(Integer.parseInt(input.get("quantity")));
+		product.addToCart();
+		MyCartPage cart = product.goToCart();
+		cart.removeItem();
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(AppiumBy.xpath("//*[@content-desc='container header']/android.widget.TextView"), "No Items"));
+		Assert.assertEquals(cart.getNoItemsText(), "No Items");
+		cart.goShopping();
 	}
 	
 	@DataProvider
