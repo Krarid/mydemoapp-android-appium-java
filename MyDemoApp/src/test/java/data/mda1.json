@@ -1,0 +1,12 @@
+[
+	{
+		"productName": "Onesie",
+		"color": "black",
+		"quantity": 3
+	},
+	{
+		"productName": "Backpack",
+		"color": "blue",
+		"quantity": 5
+	}
+]
