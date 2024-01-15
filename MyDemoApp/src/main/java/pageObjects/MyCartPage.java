@@ -32,6 +32,12 @@ public class MyCartPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "Go Shopping button")
 	private WebElement goShoppingButton;
 	
+	@AndroidFindBy(xpath = "//*[@content-desc='counter plus button']")
+	private WebElement counterPlusButton;
+	
+	@AndroidFindBy(accessibility = "total price")
+	private WebElement totalPrice;
+	
 	public MyCartPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -80,5 +86,17 @@ public class MyCartPage extends AndroidActions {
 	public String getNoItemsText()
 	{
 		return noItems.getText();
+	}
+	
+	public void increment(int items)
+	{
+		for(int i = 1; i < items; i++) {
+			counterPlusButton.click();
+		}
+	}
+	
+	public String getTotalPrice()
+	{
+		return totalPrice.getText();
 	}
 }
