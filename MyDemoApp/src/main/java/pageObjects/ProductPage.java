@@ -29,6 +29,9 @@ public class ProductPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "cart badge")
 	private WebElement cart;
 	
+	@AndroidFindBy(accessibility = "product price")
+	private WebElement price;
+	
 	public ProductPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -60,6 +63,11 @@ public class ProductPage extends AndroidActions {
 	public void addToCart()
 	{
 		addToCartButton.click();
+	}
+	
+	public float getPrice()
+	{
+		return super.getPrice(price.getText());
 	}
 	
 	public MyCartPage goToCart()

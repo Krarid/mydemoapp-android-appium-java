@@ -58,4 +58,9 @@ public class AndroidActions {
 			      "endY", y
 			  ));
 	}
+	
+	public float getPrice(String price)
+	{
+		return Float.parseFloat( price.substring(1) );
+	}
 }

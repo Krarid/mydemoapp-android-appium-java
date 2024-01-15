@@ -23,6 +23,27 @@ public class MyCartPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "Proceed To Checkout button")
 	private WebElement proceedButton;
 	
+	@AndroidFindBy(xpath = "//*[@content-desc='remove item']")
+	private WebElement removeButton;
+	
+	@AndroidFindBy(xpath = "//*[@content-desc='container header']/android.widget.TextView")
+	private WebElement noItems;
+	
+	@AndroidFindBy(accessibility = "Go Shopping button")
+	private WebElement goShoppingButton;
+	
+	@AndroidFindBy(xpath = "//*[@content-desc='counter plus button']")
+	private WebElement counterPlusButton;
+	
+	@AndroidFindBy(xpath = "//*[@content-desc='counter minus button']")
+	private WebElement counterMinusButton;
+	
+	@AndroidFindBy(xpath = "//*[@content-desc='counter amount']/android.widget.TextView")
+	private WebElement counterAmount;
+	
+	@AndroidFindBy(accessibility = "total price")
+	private WebElement totalPrice;
+	
 	public MyCartPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -55,5 +76,46 @@ public class MyCartPage extends AndroidActions {
 		}
 		
 		return new ShipmentPage(driver);
+	}
+	
+	public void removeItem()
+	{
+		removeButton.click();
+	}
+	
+	public void goShopping()
+	{
+		goShoppingButton.click();
+		scrollToElement("Products");
+	}
+	
+	public String getNoItemsText()
+	{
+		return noItems.getText();
+	}
+	
+	public void increment(int items)
+	{
+		for(int i = 1; i < items; i++) {
+			counterPlusButton.click();
+		}
+	}
+	
+	public void decrement(int items)
+	{
+		 while(getCounterAmount() > 0 && getCounterAmount() != items) {
+			 counterMinusButton.click();
+		 }
+	}
+	
+	public int getCounterAmount()
+	{
+		System.out.println(counterAmount.getText());
+		return Integer.parseInt(counterAmount.getText());
+	}
+	
+	public String getTotalPrice()
+	{
+		return totalPrice.getText();
 	}
 }

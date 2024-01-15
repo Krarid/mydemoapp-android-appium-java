@@ -1,0 +1,12 @@
+[
+	{
+		"productName": "Bolt",
+		"color": "black",
+		"quantity": 2
+	},
+	{
+		"productName": "Bike",
+		"color": "black",
+		"quantity": 4
+	}
+]
