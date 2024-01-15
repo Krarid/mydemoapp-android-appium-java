@@ -23,6 +23,15 @@ public class MyCartPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "Proceed To Checkout button")
 	private WebElement proceedButton;
 	
+	@AndroidFindBy(xpath = "//*[@content-desc='remove item']")
+	private WebElement removeButton;
+	
+	@AndroidFindBy(xpath = "//*[@content-desc='container header']/android.widget.TextView")
+	private WebElement noItems;
+	
+	@AndroidFindBy(accessibility = "Go Shopping button")
+	private WebElement goShoppingButton;
+	
 	public MyCartPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -55,5 +64,21 @@ public class MyCartPage extends AndroidActions {
 		}
 		
 		return new ShipmentPage(driver);
+	}
+	
+	public void removeItem()
+	{
+		removeButton.click();
+	}
+	
+	public void goShopping()
+	{
+		goShoppingButton.click();
+		scrollToElement("Products");
+	}
+	
+	public String getNoItemsText()
+	{
+		return noItems.getText();
 	}
 }
