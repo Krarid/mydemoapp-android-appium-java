@@ -1,5 +1,9 @@
 package pageObjects;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -67,6 +71,21 @@ public class ShipmentPage extends AndroidActions {
 	public void enterCountry(String country)
 	{
 		this.country.sendKeys(country);
+	}
+	
+	public void enterShipmentDetails() throws IOException
+	{
+		Properties property = new Properties();
+		FileInputStream propertyFile = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\data.properties");
+		
+		property.load(propertyFile);
+		
+		enterFullName(property.getProperty("fullName"));
+		enterAddress(property.getProperty("address"));
+		enterCity(property.getProperty("city"));
+		enterState(property.getProperty("state"));
+		enterZipCode(property.getProperty("zipCode"));
+		enterCountry(property.getProperty("country"));
 	}
 	
 	public PaymentPage toPayment()
