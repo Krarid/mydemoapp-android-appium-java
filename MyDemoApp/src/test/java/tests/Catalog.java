@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -185,6 +186,61 @@ public class Catalog extends BaseTest {
 			}
 			
 			products.returnToCatalog();
+		}
+	}
+	
+	@Test
+	public void SortProductsBy()
+	{
+		Stack<String> names;
+		Stack<Float> prices;
+		
+		// Name ascending
+		products.sortBy("nameAsc");
+		names = products.getProductNames();
+		
+		for( int i = 0; i < names.size() - 1; i++) {
+
+			if( names.get(i).compareToIgnoreCase(names.get(i+1)) <= 0 )
+				Assert.assertTrue(true);
+			else
+				Assert.assertTrue(false);
+		}
+		
+		// Name descending
+		products.sortBy("nameDesc");
+		names = products.getProductNames();
+		
+		for( int i = 0; i < names.size() - 1; i++) {
+
+			if( names.get(i).compareToIgnoreCase(names.get(i+1)) >= 0 )
+				Assert.assertTrue(true);
+			else
+				Assert.assertTrue(false);
+		}
+		
+		// Price ascending
+		products.sortBy("priceAsc");
+		prices = products.getPrices();
+		
+		for( int i = 0; i < prices.size() - 1; i++) {
+
+			if( prices.get(i) <= prices.get(i+1) )
+				Assert.assertTrue(true);
+			else
+				Assert.assertTrue(false);
+		}
+		
+		// Price descending
+		products.sortBy("priceDesc");
+		prices = products.getPrices();
+		
+		for( int i = 0; i < prices.size() - 1; i++) {
+
+			if( prices.get(i) >= prices.get(i+1) )
+				Assert.assertTrue(true);
+			else
+				Assert.assertTrue(false);
 		}
 	}
 	
