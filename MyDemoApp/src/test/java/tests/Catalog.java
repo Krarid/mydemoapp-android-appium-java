@@ -169,6 +169,25 @@ public class Catalog extends BaseTest {
 		Assert.assertEquals(totalPrice, "$" + df.format(total));
 	}
 	
+	@Test
+	public void SubmitReview() throws InterruptedException
+	{
+		ProductPage product;
+		
+		for(int i = 0; i < 6; i++) {
+			product = products.chooseProduct(i);
+			
+			for(int j = 0; j < 5; j++) {
+				product.submitReview(j);
+				Thread.sleep(200);
+				Assert.assertEquals(product.getTextModal(), "Thank you for submitting your review!");
+				product.closeModal();
+			}
+			
+			products.returnToCatalog();
+		}
+	}
+	
 	@DataProvider
 	public Object[][] getData(Method m) throws IOException
 	{

@@ -20,6 +20,12 @@ public class ProductsPage extends AndroidActions {
 	@AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='store item']")
 	private List<WebElement> products;
 	
+	@AndroidFindBy(xpath = "//*[@content-desc='open menu']/android.widget.ImageView")
+	private WebElement hamburgerIcon;
+	
+	@AndroidFindBy(accessibility = "menu item catalog")
+	private WebElement catalog;
+	
 	public ProductsPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -60,5 +66,11 @@ public class ProductsPage extends AndroidActions {
 		}
 		
 		return new ProductPage(driver);
+	}
+	
+	public void returnToCatalog()
+	{
+		hamburgerIcon.click();
+		catalog.click();
 	}
 }
