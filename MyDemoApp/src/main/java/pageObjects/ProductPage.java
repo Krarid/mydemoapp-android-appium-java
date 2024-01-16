@@ -32,6 +32,18 @@ public class ProductPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "product price")
 	private WebElement price;
 	
+	@AndroidFindBy(xpath = "//*[@content-desc='cart badge']/android.widget.TextView")
+	private WebElement cartCount;
+	
+	@AndroidFindBy(xpath = "//android.view.ViewGroup[contains(@content-desc,'review star')]" )
+	private List<WebElement> reviewStar;
+	
+	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
+	private WebElement textModal;
+	
+	@AndroidFindBy(accessibility = "Close Modal button")
+	private WebElement closeModalButton;
+	
 	public ProductPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -60,6 +72,21 @@ public class ProductPage extends AndroidActions {
 		}
 	}
 	
+	public void submitReview(int star)
+	{
+		reviewStar.get(star).click();
+	}
+	
+	public void closeModal()
+	{
+		closeModalButton.click();
+	}
+	
+	public String getTextModal()
+	{
+		return textModal.getText();
+	}
+	
 	public void addToCart()
 	{
 		addToCartButton.click();
@@ -68,6 +95,11 @@ public class ProductPage extends AndroidActions {
 	public float getPrice()
 	{
 		return super.getPrice(price.getText());
+	}
+	
+	public int getCartCount()
+	{
+		return Integer.parseInt(cartCount.getText());
 	}
 	
 	public MyCartPage goToCart()

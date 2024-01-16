@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -134,6 +135,115 @@ public class Catalog extends BaseTest {
 		complete.continueShopping();
 	}
 	
+	@Test(dataProvider="getData")
+	public void AddToCartManyTimes(HashMap<String, String> input)
+	{
+		final DecimalFormat df = new DecimalFormat("0.00");
+		
+		int items = Integer.parseInt(input.get("items")), times = Integer.parseInt(input.get("times"));
+		float price = 0.0f, total = 0.0f;
+		
+		ProductPage product = products.chooseProduct(input.get("productName"));
+		
+		price = product.getPrice();
+		total = items * times * price;
+		
+		product.chooseQuantity(items);
+		
+		for(int i = 1; i <= times; i++) {
+			product.addToCart();
+		}
+		
+		Assert.assertEquals(product.getCartCount(), items * times);
+		
+		MyCartPage cart = product.goToCart();
+		
+		int counterAmount = cart.getCounterAmount();
+		int totalitems = cart.getTotalNumberOfItems();
+		String totalPrice = cart.getTotalPrice();
+		
+		cart.removeItem();
+		cart.goShopping();
+		
+		Assert.assertEquals(counterAmount, items * times);
+		Assert.assertEquals(totalitems, items * times);
+		Assert.assertEquals(totalPrice, "$" + df.format(total));
+	}
+	
+	@Test
+	public void SubmitReview() throws InterruptedException
+	{
+		ProductPage product;
+		
+		for(int i = 0; i < 6; i++) {
+			product = products.chooseProduct(i);
+			
+			for(int j = 0; j < 5; j++) {
+				product.submitReview(j);
+				Thread.sleep(200);
+				Assert.assertEquals(product.getTextModal(), "Thank you for submitting your review!");
+				product.closeModal();
+			}
+			
+			products.returnToCatalog();
+		}
+	}
+	
+	@Test
+	public void SortProductsBy()
+	{
+		Stack<String> names;
+		Stack<Float> prices;
+		
+		// Name ascending
+		products.sortBy("nameAsc");
+		names = products.getProductNames();
+		
+		for( int i = 0; i < names.size() - 1; i++) {
+
+			if( names.get(i).compareToIgnoreCase(names.get(i+1)) <= 0 )
+				Assert.assertTrue(true);
+			else
+				Assert.assertTrue(false);
+		}
+		
+		// Name descending
+		products.sortBy("nameDesc");
+		names = products.getProductNames();
+		
+		for( int i = 0; i < names.size() - 1; i++) {
+
+			if( names.get(i).compareToIgnoreCase(names.get(i+1)) >= 0 )
+				Assert.assertTrue(true);
+			else
+				Assert.assertTrue(false);
+		}
+		
+		// Price ascending
+		products.sortBy("priceAsc");
+		prices = products.getPrices();
+		
+		for( int i = 0; i < prices.size() - 1; i++) {
+
+			if( prices.get(i) <= prices.get(i+1) )
+				Assert.assertTrue(true);
+			else
+				Assert.assertTrue(false);
+		}
+		
+		// Price descending
+		products.sortBy("priceDesc");
+		prices = products.getPrices();
+		
+		for( int i = 0; i < prices.size() - 1; i++) {
+
+			if( prices.get(i) >= prices.get(i+1) )
+				Assert.assertTrue(true);
+			else
+				Assert.assertTrue(false);
+		}
+	}
+	
 	@DataProvider
 	public Object[][] getData(Method m) throws IOException
 	{
@@ -155,6 +265,10 @@ public class Catalog extends BaseTest {
 			
 			case "DecreaseTheCart":
 				dataFile = "4";
+			break;
+			
+			case "AddToCartManyTimes":
+				dataFile = "5";
 			break;
 		}
 		

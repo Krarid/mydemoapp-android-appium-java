@@ -41,6 +41,9 @@ public class MyCartPage extends AndroidActions {
 	@AndroidFindBy(xpath = "//*[@content-desc='counter amount']/android.widget.TextView")
 	private WebElement counterAmount;
 	
+	@AndroidFindBy(accessibility = "total number")
+	private WebElement totalNumber;
+	
 	@AndroidFindBy(accessibility = "total price")
 	private WebElement totalPrice;
 	
@@ -117,5 +120,10 @@ public class MyCartPage extends AndroidActions {
 	public String getTotalPrice()
 	{
 		return totalPrice.getText();
+	}
+	
+	public int getTotalNumberOfItems()
+	{
+		return Integer.parseInt(totalNumber.getText().split(" ")[0]);
 	}
 }
