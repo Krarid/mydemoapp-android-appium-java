@@ -32,6 +32,9 @@ public class ProductPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "product price")
 	private WebElement price;
 	
+	@AndroidFindBy(xpath = "//*[@content-desc='cart badge']/android.widget.TextView")
+	private WebElement cartCount;
+	
 	public ProductPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -68,6 +71,11 @@ public class ProductPage extends AndroidActions {
 	public float getPrice()
 	{
 		return super.getPrice(price.getText());
+	}
+	
+	public int getCartCount()
+	{
+		return Integer.parseInt(cartCount.getText());
 	}
 	
 	public MyCartPage goToCart()

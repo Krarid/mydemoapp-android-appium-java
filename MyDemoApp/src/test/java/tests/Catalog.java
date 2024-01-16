@@ -134,6 +134,41 @@ public class Catalog extends BaseTest {
 		complete.continueShopping();
 	}
 	
+	@Test(dataProvider="getData")
+	public void AddToCartManyTimes(HashMap<String, String> input)
+	{
+		final DecimalFormat df = new DecimalFormat("0.00");
+		
+		int items = Integer.parseInt(input.get("items")), times = Integer.parseInt(input.get("times"));
+		float price = 0.0f, total = 0.0f;
+		
+		ProductPage product = products.chooseProduct(input.get("productName"));
+		
+		price = product.getPrice();
+		total = items * times * price;
+		
+		product.chooseQuantity(items);
+		
+		for(int i = 1; i <= times; i++) {
+			product.addToCart();
+		}
+		
+		Assert.assertEquals(product.getCartCount(), items * times);
+		
+		MyCartPage cart = product.goToCart();
+		
+		int counterAmount = cart.getCounterAmount();
+		int totalitems = cart.getTotalNumberOfItems();
+		String totalPrice = cart.getTotalPrice();
+		
+		cart.removeItem();
+		cart.goShopping();
+		
+		Assert.assertEquals(counterAmount, items * times);
+		Assert.assertEquals(totalitems, items * times);
+		Assert.assertEquals(totalPrice, "$" + df.format(total));
+	}
+	
 	@DataProvider
 	public Object[][] getData(Method m) throws IOException
 	{
@@ -155,6 +190,10 @@ public class Catalog extends BaseTest {
 			
 			case "DecreaseTheCart":
 				dataFile = "4";
+			break;
+			
+			case "AddToCartManyTimes":
+				dataFile = "5";
 			break;
 		}
 		
