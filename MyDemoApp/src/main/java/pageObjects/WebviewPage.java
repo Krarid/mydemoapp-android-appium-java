@@ -18,6 +18,9 @@ public class WebviewPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "Go To Site button")
 	private WebElement goToSiteButton;
 	
+	@AndroidFindBy(xpath = "//*[@content-desc='URL-error-message']/android.widget.TextView")
+	private WebElement urlErrorMessage;
+	
 	public WebviewPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -32,5 +35,10 @@ public class WebviewPage extends AndroidActions {
 	public void goToSite()
 	{
 		goToSiteButton.click();
+	}
+	
+	public String getUrlErrorMessage()
+	{
+		return urlErrorMessage.getText();
 	}
 }

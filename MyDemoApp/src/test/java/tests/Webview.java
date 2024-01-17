@@ -34,4 +34,15 @@ public class Webview extends BaseTest {
 		
 		driver.context(nativeContext);
 	}
+	
+	@Test
+	public void errorMessageWithIncorrectURL()
+	{
+		MenuPage menu = new MenuPage(driver);
+		WebviewPage webview = menu.goToWebview();
+		webview.enterUrl("test");
+		webview.goToSite();
+		
+		Assert.assertEquals(webview.getUrlErrorMessage(), "Please provide a correct https url.");
+	}
 }
