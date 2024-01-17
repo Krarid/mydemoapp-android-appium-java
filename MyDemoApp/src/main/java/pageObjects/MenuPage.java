@@ -27,6 +27,12 @@ public class MenuPage extends AndroidActions {
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	}
 	
+	public void goToCatalog()
+	{
+		hamburgerIcon.click();
+		catalog.click();
+	}
+	
 	public WebviewPage goToWebview()
 	{
 		hamburgerIcon.click();
