@@ -64,3 +64,5 @@ MyDemoApp/test-output/testng.css
 MyDemoApp/test-output/Default suite/testng-failed.xml
 
 MyDemoApp/test-output/testng-failed.xml
+
+MyDemoApp/test-output/junitreports/
