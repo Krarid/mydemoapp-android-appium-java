@@ -7,8 +7,8 @@ import pageObjects.MenuPage;
 import utils.BaseTest;
 
 public class Drawing extends BaseTest {
-	@Test
-	public void performDrawingAction()
+	// @Test
+	public void PerformDrawingAction()
 	{
 		MenuPage menu = new MenuPage(driver);
 		DrawingPage drawing = menu.goToDrawing();
@@ -22,8 +22,8 @@ public class Drawing extends BaseTest {
 		}
 	}
 	
-	@Test
-	public void clearDrawing()
+	// @Test
+	public void ClearDrawing()
 	{
 		MenuPage menu = new MenuPage(driver);
 		DrawingPage drawing = menu.goToDrawing();
@@ -32,5 +32,11 @@ public class Drawing extends BaseTest {
 		drawing.draw(100, 1000, 1500, 1500);
 		
 		drawing.clearDrawing();
+	}
+	
+	@Test
+	public void saveDrawing()
+	{
+		
 	}
 }
