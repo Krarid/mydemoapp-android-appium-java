@@ -21,10 +21,19 @@ public class MenuPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "menu item webview")
 	private WebElement webview;
 	
+	@AndroidFindBy(accessibility = "menu item drawing")
+	private WebElement drawing;
+	
 	public MenuPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+	}
+	
+	public void goToCatalog()
+	{
+		hamburgerIcon.click();
+		catalog.click();
 	}
 	
 	public WebviewPage goToWebview()
@@ -33,5 +42,13 @@ public class MenuPage extends AndroidActions {
 		webview.click();
 		
 		return new WebviewPage(driver);
+	}
+	
+	public DrawingPage goToDrawing()
+	{
+		hamburgerIcon.click();
+		drawing.click();
+		
+		return new DrawingPage(driver);
 	}
 }

@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 
 import io.appium.java_client.AppiumBy;
 import pageObjects.CompletePage;
+import pageObjects.MenuPage;
 import pageObjects.MyCartPage;
 import pageObjects.PaymentPage;
 import pageObjects.ProductPage;
@@ -174,6 +175,7 @@ public class Catalog extends BaseTest {
 	public void SubmitReview() throws InterruptedException
 	{
 		ProductPage product;
+		MenuPage menu = new MenuPage(driver);
 		
 		for(int i = 0; i < 6; i++) {
 			product = products.chooseProduct(i);
@@ -185,7 +187,8 @@ public class Catalog extends BaseTest {
 				product.closeModal();
 			}
 			
-			products.returnToCatalog();
+			
+			menu.goToCatalog();
 		}
 	}
 	

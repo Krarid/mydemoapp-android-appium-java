@@ -59,6 +59,29 @@ public class AndroidActions {
 			  ));
 	}
 	
+	public void dragCoordinate(int startX, int startY, int endX, int endY)
+	{
+		// Java
+		((JavascriptExecutor) driver).executeScript("mobile: dragGesture", ImmutableMap.of(
+		    "startX", startX,
+		    "startY", startY,
+		    "endX", endX,
+		    "endY", endY
+		));
+	}
+	
+	public void dragFromElement(WebElement element, int startX, int startY, int endX, int endY)
+	{
+		// Java
+		((JavascriptExecutor) driver).executeScript("mobile: dragGesture", ImmutableMap.of(
+			"elementId", ((RemoteWebElement) element).getId(),
+		    "startX", startX,
+		    "startY", startY,
+		    "endX", endX,
+		    "endY", endY
+		));
+	}
+	
 	public float getPrice(String price)
 	{
 		return Float.parseFloat( price.substring(1) );

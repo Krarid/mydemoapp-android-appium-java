@@ -36,7 +36,7 @@ public class Webview extends BaseTest {
 	}
 	
 	@Test
-	public void errorMessageWithIncorrectURL()
+	public void ErrorMessageWithIncorrectURL()
 	{
 		MenuPage menu = new MenuPage(driver);
 		WebviewPage webview = menu.goToWebview();
