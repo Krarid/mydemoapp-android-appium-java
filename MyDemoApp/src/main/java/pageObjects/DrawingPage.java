@@ -1,7 +1,11 @@
 package pageObjects;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -23,10 +27,10 @@ public class DrawingPage extends AndroidActions {
 	public WebElement signaturePad;
 	
 	@AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_button")
-	private WebElement yesButton;
+	private WebElement allowButton;
 	
 	@AndroidFindBy(id = "com.android.permissioncontroller:id/permission_deny_button")
-	private WebElement noButton;
+	private WebElement denyButton;
 	
 	@AndroidFindBy(id = "android:id/message")
 	private WebElement saveDrawingMessage;
@@ -50,14 +54,17 @@ public class DrawingPage extends AndroidActions {
 		clearButton.click();
 	}
 	
-	public void saveDrawing(boolean save)
+	public void saveDrawing()
 	{
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+		
 		saveButton.click();
 		
-		if(save)
-			yesButton.click();
-		else
-			noButton.click();
+		try {
+			wait.until(ExpectedConditions.invisibilityOf(allowButton));
+		} catch(Exception e) {
+			allowButton.click();
+		}
 	}
 	
 	public String getSuccessMessage()
