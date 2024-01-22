@@ -15,6 +15,9 @@ public class AboutPage extends AndroidActions {
 	@AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='about screen']//android.widget.TextView[contains(@text,'build')]")
 	private WebElement build;
 	
+	@AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='about screen']//android.widget.TextView[contains(@text,'Go to the Sauce Labs website.')]")
+	private WebElement sauceLabsWebsite;
+	
 	public AboutPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -24,5 +27,10 @@ public class AboutPage extends AndroidActions {
 	public String getBuild()
 	{
 		return build.getText();
+	}
+	
+	public void goToSauceLabs()
+	{
+		sauceLabsWebsite.click();
 	}
 }
