@@ -24,6 +24,9 @@ public class MenuPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "menu item drawing")
 	private WebElement drawing;
 	
+	@AndroidFindBy(accessibility = "menu item about")
+	private WebElement about;
+	
 	public MenuPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -50,5 +53,13 @@ public class MenuPage extends AndroidActions {
 		drawing.click();
 		
 		return new DrawingPage(driver);
+	}
+	
+	public AboutPage goToAbout()
+	{
+		hamburgerIcon.click();
+		about.click();
+		
+		return new AboutPage(driver);
 	}
 }
