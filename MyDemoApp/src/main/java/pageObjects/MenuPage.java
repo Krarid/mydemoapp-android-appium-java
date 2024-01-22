@@ -24,6 +24,24 @@ public class MenuPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "menu item drawing")
 	private WebElement drawing;
 	
+	@AndroidFindBy(accessibility = "menu item about")
+	private WebElement about;
+	
+	@AndroidFindBy(accessibility = "menu item reset app")
+	private WebElement resetApp;
+	
+	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[contains(@text, 'RESET APP')]")
+	private WebElement resetAppYes;
+	
+	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[contains(@text, 'CANCEL')]")
+	private WebElement resetAppNo;
+	
+	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[contains(@text, 'App State has been reset.')]")
+	private WebElement resetAppAlert;
+	
+	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[contains(@text, 'OK')]")
+	private WebElement resetAppOK;
+	
 	public MenuPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -50,5 +68,35 @@ public class MenuPage extends AndroidActions {
 		drawing.click();
 		
 		return new DrawingPage(driver);
+	}
+	
+	public AboutPage goToAbout()
+	{
+		hamburgerIcon.click();
+		about.click();
+		
+		return new AboutPage(driver);
+	}
+	
+	public void resetAppState(boolean option)
+	{
+		hamburgerIcon.click();
+		resetApp.click();
+		
+		if(option) {
+			resetAppYes.click();
+		} else {
+			resetAppNo.click();
+		}
+	}
+	
+	public String getResetTitle()
+	{
+		return resetAppAlert.getText();
+	}
+	
+	public void ok()
+	{
+		resetAppOK.click();
 	}
 }
