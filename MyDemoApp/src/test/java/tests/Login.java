@@ -71,6 +71,20 @@ public class Login extends BaseTest {
 		Assert.assertEquals(login.getPasswordErrorMessage(), "Password is required");
 	}
 	
+	@Test
+	public void Logout() throws InterruptedException
+	{
+		MenuPage menu = new MenuPage(driver);
+		LoginPage login = menu.goToLogin();
+		login.login("bob@example.com", "10203040");
+		
+		String logoutMessage = menu.goToLogout();
+		
+		Thread.sleep(Duration.ofSeconds(1));
+		
+		Assert.assertEquals(logoutMessage, "You are successfully logged out.");
+	}
+	
 	@AfterMethod
 	public void logout()
 	{
