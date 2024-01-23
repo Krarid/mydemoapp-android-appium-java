@@ -33,6 +33,15 @@ public class MenuPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "menu item log in")
 	private WebElement login;
 	
+	@AndroidFindBy(accessibility = "menu item log out")
+	private WebElement logout;
+	
+	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[contains(@text, 'LOG OUT')]")
+	private WebElement logoutYes;
+	
+	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[contains(@text, 'OK')]")
+	private WebElement logoutOK;
+	
 	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[contains(@text, 'RESET APP')]")
 	private WebElement resetAppYes;
 	
@@ -87,6 +96,14 @@ public class MenuPage extends AndroidActions {
 		login.click();
 		
 		return new LoginPage(driver);
+	}
+	
+	public void goToLogout()
+	{
+		hamburgerIcon.click();
+		logout.click();
+		logoutYes.click();
+		logoutOK.click();
 	}
 	
 	public void resetAppState(boolean option)
