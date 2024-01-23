@@ -45,6 +45,18 @@ public class Login extends BaseTest {
 		Assert.assertEquals(login.getErrorMessage(), "Sorry, this user has been locked out.");
 	}
 	
+	@Test
+	public void LoginWithNoUsername()
+	{
+		MenuPage menu = new MenuPage(driver);
+		LoginPage login = menu.goToLogin();
+		
+		login.enterPassword("10203040");
+		login.login();
+		
+		Assert.assertEquals(login.getUsernameErrorMessage(), "Username is required");
+	}
+	
 	@AfterMethod
 	public void logout()
 	{
