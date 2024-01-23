@@ -51,10 +51,24 @@ public class Login extends BaseTest {
 		MenuPage menu = new MenuPage(driver);
 		LoginPage login = menu.goToLogin();
 		
+		login.clear();
 		login.enterPassword("10203040");
 		login.login();
 		
 		Assert.assertEquals(login.getUsernameErrorMessage(), "Username is required");
+	}
+	
+	@Test
+	public void LoginWithNoPassword()
+	{
+		MenuPage menu = new MenuPage(driver);
+		LoginPage login = menu.goToLogin();
+		
+		login.clear();
+		login.enterUsername("bob@example.com");
+		login.login();
+		
+		Assert.assertEquals(login.getPasswordErrorMessage(), "Password is required");
 	}
 	
 	@AfterMethod

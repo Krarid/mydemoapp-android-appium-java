@@ -24,6 +24,9 @@ public class LoginPage extends AndroidActions {
 	@AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='Username-error-message']/android.widget.TextView")
 	private WebElement usernameError;
 	
+	@AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='Password-error-message']/android.widget.TextView")
+	private WebElement passwordError;
+	
 	@AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='generic-error-message']/android.widget.TextView")
 	private WebElement errorMessage;
 	
@@ -43,6 +46,12 @@ public class LoginPage extends AndroidActions {
 	{
 		this.password.clear();
 		this.password.sendKeys(password);
+	}
+	
+	public void clear()
+	{
+		username.clear();
+		password.clear();
 	}
 	
 	public ShipmentPage login()
@@ -66,5 +75,10 @@ public class LoginPage extends AndroidActions {
 	public String getUsernameErrorMessage()
 	{
 		return usernameError.getText();
+	}
+	
+	public String getPasswordErrorMessage()
+	{
+		return passwordError.getText();
 	}
 }
