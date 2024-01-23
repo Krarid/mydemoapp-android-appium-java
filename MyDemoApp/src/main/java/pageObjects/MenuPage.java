@@ -30,6 +30,9 @@ public class MenuPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "menu item reset app")
 	private WebElement resetApp;
 	
+	@AndroidFindBy(accessibility = "menu item log in")
+	private WebElement login;
+	
 	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[contains(@text, 'RESET APP')]")
 	private WebElement resetAppYes;
 	
@@ -76,6 +79,14 @@ public class MenuPage extends AndroidActions {
 		about.click();
 		
 		return new AboutPage(driver);
+	}
+	
+	public LoginPage goToLogin()
+	{
+		hamburgerIcon.click();
+		login.click();
+		
+		return new LoginPage(driver);
 	}
 	
 	public void resetAppState(boolean option)
