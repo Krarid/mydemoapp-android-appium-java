@@ -30,6 +30,21 @@ public class MenuPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "menu item reset app")
 	private WebElement resetApp;
 	
+	@AndroidFindBy(accessibility = "menu item log in")
+	private WebElement login;
+	
+	@AndroidFindBy(accessibility = "menu item log out")
+	private WebElement logout;
+	
+	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[contains(@text, 'LOG OUT')]")
+	private WebElement logoutYes;
+	
+	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[contains(@text, 'OK')]")
+	private WebElement logoutOK;
+	
+	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[contains(@text, 'You are successfully logged out.')]")
+	private WebElement logoutMessage;
+	
 	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[contains(@text, 'RESET APP')]")
 	private WebElement resetAppYes;
 	
@@ -76,6 +91,25 @@ public class MenuPage extends AndroidActions {
 		about.click();
 		
 		return new AboutPage(driver);
+	}
+	
+	public LoginPage goToLogin()
+	{
+		hamburgerIcon.click();
+		login.click();
+		
+		return new LoginPage(driver);
+	}
+	
+	public String goToLogout()
+	{
+		hamburgerIcon.click();
+		logout.click();
+		logoutYes.click();
+		String logoutMessage = this.logoutMessage.getText();
+		logoutOK.click();
+		
+		return logoutMessage;
 	}
 	
 	public void resetAppState(boolean option)
