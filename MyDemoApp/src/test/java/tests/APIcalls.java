@@ -52,4 +52,19 @@ public class APIcalls extends BaseTest {
 		
 		Assert.assertEquals(apiCalls.getUnauthorizedText(), "Unauthorized");
 	}
+	
+	@Test
+	public void NotFoundErrorResponse()
+	{
+		MenuPage menu = new MenuPage(driver);
+		APIcallsPage apiCalls = menu.goToApiCalls();
+		
+		apiCalls.goToNotFound();
+		
+		RestAssured.given().header("Content-Type", "application/json").
+				when().get("https://api.eu-central-1.saucelabs.com/v1/").
+				then().assertThat().statusCode(404).extract().response().asString();
+		
+		Assert.assertEquals(apiCalls.getNotFoundText(), "Not found");
+	}
 }
