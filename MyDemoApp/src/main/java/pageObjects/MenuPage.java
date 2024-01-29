@@ -36,6 +36,9 @@ public class MenuPage extends AndroidActions {
 	@AndroidFindBy(accessibility = "menu item log out")
 	private WebElement logout;
 	
+	@AndroidFindBy(accessibility = "menu item api calls")
+	private WebElement apiCalls;
+	
 	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[contains(@text, 'LOG OUT')]")
 	private WebElement logoutYes;
 	
@@ -110,6 +113,14 @@ public class MenuPage extends AndroidActions {
 		logoutOK.click();
 		
 		return logoutMessage;
+	}
+	
+	public APIcallsPage goToApiCalls()
+	{
+		hamburgerIcon.click();
+		apiCalls.click();
+		
+		return new APIcallsPage(driver);
 	}
 	
 	public void resetAppState(boolean option)
