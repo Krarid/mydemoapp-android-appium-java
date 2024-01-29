@@ -24,6 +24,12 @@ public class APIcallsPage extends AndroidActions {
 	@AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='api calls screen']/android.view.ViewGroup[5]")
 	private WebElement notFoundButton;
 	
+	@AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='api calls screen']/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
+	private WebElement unauthorized;
+	
+	@AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='api calls screen']/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
+	private WebElement notFound;
+	
 	public APIcallsPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -45,8 +51,18 @@ public class APIcallsPage extends AndroidActions {
 		unauthorizedButton.click();
 	}
 	
-	public void notFound()
+	public void goToNotFound()
 	{
 		notFoundButton.click();
+	}
+	
+	public String getUnauthorizedText()
+	{
+		return unauthorized.getText();
+	}
+	
+	public String getNotFoundText()
+	{
+		return notFound.getText();
 	}
 }

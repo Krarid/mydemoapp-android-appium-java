@@ -37,4 +37,19 @@ public class APIcalls extends BaseTest {
 		
 		Assert.assertTrue(response.contains("iPhone"));
 	}
+	
+	@Test
+	public void UnauthorizedErrorResponse()
+	{
+		MenuPage menu = new MenuPage(driver);
+		APIcallsPage apiCalls = menu.goToApiCalls();
+		
+		apiCalls.goToUnauthorized();
+		
+		RestAssured.given().header("Content-Type", "application/json").
+				when().get("https://api.eu-central-1.saucelabs.com/v1/rdc-devices-2").
+				then().assertThat().statusCode(401).extract().response().asString();
+		
+		Assert.assertEquals(apiCalls.getUnauthorizedText(), "Unauthorized");
+	}
 }
