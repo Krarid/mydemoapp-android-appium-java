@@ -136,7 +136,7 @@ public class Catalog extends BaseTest {
 		complete.continueShopping();
 	}
 	
-	@Test(dataProvider="getData")
+	@Test(dataProvider="getData", groups= {"Smoke"})
 	public void AddToCartManyTimes(HashMap<String, String> input)
 	{
 		final DecimalFormat df = new DecimalFormat("0.00");
@@ -192,7 +192,7 @@ public class Catalog extends BaseTest {
 		}
 	}
 	
-	@Test
+	@Test(groups= {"Smoke"})
 	public void SortProductsBy()
 	{
 		Stack<String> names;

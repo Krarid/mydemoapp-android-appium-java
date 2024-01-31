@@ -15,7 +15,7 @@ import utils.BaseTest;
 
 public class Login extends BaseTest {
 
-	@Test
+	@Test(groups= {"Smoke"})
 	public void LoginValidCredentials()
 	{
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));

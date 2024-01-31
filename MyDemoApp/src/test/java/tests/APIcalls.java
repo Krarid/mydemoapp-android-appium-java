@@ -10,7 +10,7 @@ import utils.BaseTest;
 
 public class APIcalls extends BaseTest {
 
-	@Test
+	@Test(groups= {"Smoke"})
 	public void ListOfDevicesInEU_DC()
 	{
 		MenuPage menu = new MenuPage(driver);

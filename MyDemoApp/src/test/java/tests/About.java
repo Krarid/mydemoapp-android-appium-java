@@ -11,7 +11,7 @@ import utils.BaseTest;
 
 public class About extends BaseTest {
 	
-	@Test
+	@Test(groups= {"Smoke"})
 	public void VerifyLastBuild()
 	{
 		MenuPage menu = new MenuPage(driver);
