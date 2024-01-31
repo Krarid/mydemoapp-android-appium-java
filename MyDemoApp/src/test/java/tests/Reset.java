@@ -13,7 +13,7 @@ import utils.BaseTest;
 
 public class Reset extends BaseTest {
 
-	@Test
+	@Test(groups= {"Smoke"})
 	public void ResetAppState()
 	{
 		MenuPage menu = new MenuPage(driver);

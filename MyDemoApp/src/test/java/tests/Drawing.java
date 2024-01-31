@@ -8,7 +8,7 @@ import pageObjects.MenuPage;
 import utils.BaseTest;
 
 public class Drawing extends BaseTest {
-	@Test
+	@Test(groups= {"Smoke"})
 	public void PerformDrawingAction()
 	{
 		MenuPage menu = new MenuPage(driver);

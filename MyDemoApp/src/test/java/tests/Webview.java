@@ -10,7 +10,7 @@ import pageObjects.WebviewPage;
 import utils.BaseTest;
 
 public class Webview extends BaseTest {
-	@Test
+	@Test(groups= {"Smoke"})
 	public void GoToExternalSite()
 	{
 		MenuPage menu = new MenuPage(driver);
