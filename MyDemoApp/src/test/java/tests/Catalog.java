@@ -277,6 +277,12 @@ public class Catalog extends BaseTest {
 		
 		List<HashMap<String, String>> data = getJsonData("C:\\Users\\javie\\OneDrive\\Documents\\Github\\mydemoapp-android-appium-java\\MyDemoApp\\src\\test\\java\\data\\mda" + dataFile + ".json");
 		
-		return new Object[][] { {data.get(0)}, {data.get(1)} };
+		Object[][] objData = new Object[data.size()][1];
+		
+		for(int i = 0; i < data.size(); i++) {
+			objData[i][0] = data.get(i);
+		}
+		
+		return objData;
 	}
 }

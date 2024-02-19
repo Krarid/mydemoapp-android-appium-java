@@ -45,8 +45,9 @@ public class Reset extends BaseTest {
 		
 		if(reset) {
 			menu.ok();
-			driver.navigate().back();
 			Assert.assertTrue(false);
 		}
+		
+		driver.navigate().back();
 	}
 }
