@@ -1,7 +1,11 @@
 package pageObjects;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -31,6 +35,10 @@ public class AboutPage extends AndroidActions {
 	
 	public void goToSauceLabs()
 	{
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		
 		sauceLabsWebsite.click();
+		
+		wait.until(ExpectedConditions.invisibilityOf(sauceLabsWebsite));
 	}
 }
